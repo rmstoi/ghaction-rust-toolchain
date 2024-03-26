@@ -77,6 +77,9 @@ jobs:
       - name: Generate SHA-256
         if: startsWith(github.ref, 'refs/tags/')
         run: shasum -a 256 ${{ matrix.bin }}-${{ matrix.platform.os }}-${{ matrix.platform.target }}-${{ matrix.toolchain }}.tar.gz > ${{ matrix.bin }}-${{ matrix.platform.os }}-${{ matrix.platform.target }}-${{ matrix.toolchain }}.sha256sum
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
       # - name: Publish GitHub release
       #   uses: softprops/action-gh-release@v2
       #   if: startsWith(github.ref, 'refs/tags/')
